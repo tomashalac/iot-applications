@@ -1,0 +1,1 @@
+This whole folder has to run on the Raspberry Pi
