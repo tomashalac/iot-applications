@@ -9,17 +9,17 @@ This light can be managed with the original light button, Alexa, an Android app 
 NOTE: Necessary to make an explanation (TODO)
 
 # Voice commands for alexa:
-    * Ask <App name> {State}
-    * Open <App name>
-        Alexa responds: Indicates action
-        You can respond: {State}
-        
-    {State} = ["on", "off", "switch"]
+ * Ask (App name) {State}
+ * Open (App name)
+     1. Alexa responds: Indicates action
+     2. You can respond: {State}
+
+ {State} = ["on", "off", "switch"]
 
 # Using
-    * [AWS IoT](https://aws.amazon.com/iot/
-    * [AWS Lambda](https://aws.amazon.com/lambda/)
-    * [AWS API Gateway](https://aws.amazon.com/api-gateway/)
-    * [Amazon Alexa](https://developer.amazon.com/es/alexa)
-    * [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
+ * [AWS IoT](https://aws.amazon.com/iot/)
+ * [AWS Lambda](https://aws.amazon.com/lambda/)
+ * [AWS API Gateway](https://aws.amazon.com/api-gateway/)
+ * [Amazon Alexa](https://developer.amazon.com/es/alexa)
+ * [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
 
