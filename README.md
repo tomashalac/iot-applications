@@ -14,12 +14,13 @@ NOTE: Necessary to make an explanation (TODO)
      1. Alexa responds: Indicates action
      2. You can respond: {State}
 
- {State} = ["on", "off", "switch"]
+ {State} = ["on", "off", "switch", "sleep", "wake up"]
 
 # Using
  * [AWS IoT](https://aws.amazon.com/iot/)
  * [AWS Lambda](https://aws.amazon.com/lambda/)
  * [AWS API Gateway](https://aws.amazon.com/api-gateway/)
  * [Amazon Alexa](https://developer.amazon.com/es/alexa)
+ * [Amazon Alexa Dev](https://developer.amazon.com/alexa/console/ask)
  * [Raspberry Pi 3 Model B](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
 
