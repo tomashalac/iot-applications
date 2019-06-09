@@ -10,7 +10,7 @@ from datetime import datetime
 from threading import Thread
 
 
-print "\n\n\n\n\n\n\n\n\n\n\n\n\nIniciando.......\n\n"
+print "\n\n\n\n\n\n\n\n\n\n\n\n\nStarting.......\n\n"
 estadoGlobal = control.estado;
 off_keyGlobal = control.off_key
 Working = True
