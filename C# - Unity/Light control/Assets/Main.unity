@@ -598,8 +598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5533a505ca64f842927d0f633c6f7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Token: Fl401z1mzl074xj1lzdm4slslL2iO
-  URL: https://povyqz20wl.execute-api.us-east-1.amazonaws.com/prod/HttpIoT
+  Token: <Your Lambda token>
+  URL: <Your AWS API Gateway endpoint>
   On: {fileID: 304688938}
   Off: {fileID: 1221439640}
   ToDesactivate: {fileID: 69485708}

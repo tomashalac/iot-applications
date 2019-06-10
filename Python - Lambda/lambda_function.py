@@ -17,7 +17,7 @@ def respond(text, code = 200):
 
 
 def lambda_handler(event, context):
-    if str(event["queryStringParameters"]["token"]) == "Fl401z1mzl074xj1lzdm4slslL2iO":
+    if str(event["queryStringParameters"]["token"]) == "<Your Lambda token>":
     
         command = str(event["queryStringParameters"]["command"])
         

@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 
 public class IoT : MonoBehaviour {
 
-    public string Token = "Fl401z1mzl074xj1lzdm4slslL2iO";
-    public string URL = "https://povyqz20wl.execute-api.us-east-1.amazonaws.com/prod/HttpIoT";
+    public string Token = "<Your Lambda token>";
+    public string URL = "<Your AWS API Gateway endpoint>";
 
     private string url => URL + "?token=" + Token + "&command=";
 
