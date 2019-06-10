@@ -10,7 +10,7 @@ import sys
 dir2 = os.path.dirname(os.path.realpath(__file__))
 logging.basicConfig(level=logging.DEBUG, filename=dir2 + '/logger.log')
 host = "a1y3ud7plgc0yl-ats.iot.us-east-1.amazonaws.com"
-
+topic = "global"
 
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
@@ -46,7 +46,7 @@ def customCallback(client, userdata, message):
 
 
 def SendMSG(msg):
-    connection.publish("global", str(msg), 0)
+    connection.publish(topic, str(msg), 0)
     print("The following message was sent: " + str(msg))
 
 
@@ -63,7 +63,7 @@ def start():
         streamHandler.setFormatter(formatter)
 
         global myAWSIoTMQTTClient, host
-        myAWSIoTMQTTClient = AWSIoTMQTTShadowClient("basicPubSub")
+        myAWSIoTMQTTClient = AWSIoTMQTTShadowClient("pc")
         myAWSIoTMQTTClient.configureEndpoint(host, 8883)
         myAWSIoTMQTTClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
 
@@ -82,7 +82,7 @@ def start():
         connection.configureConnectDisconnectTimeout(30)  # 10 sec
         connection.configureMQTTOperationTimeout(10)  # 5 sec
 
-        connection.subscribe("global", 1, customCallback)
+        connection.subscribe(topic, 1, customCallback)
 
         SendMSG('{"to": "server", "client-id": "2", "info": "start-up"}')
     except Exception as e:
