@@ -8,6 +8,22 @@ This light can be managed with the original light button, Alexa, an Android app 
 # Installation
 NOTE: Necessary to make an explanation (TODO)
 
+## Config contab
+```sh
+sudo crontab -e
+```
+Don't forget to change the directory in the CD command
+add this command:
+```sh
+@reboot screen -S server -dm bash -c "CD /home/pi/Desktop/you_folder/ && python3 main.py 2>&1 | tee output.log"
+```
+
+# Config files
+ * File: "Python - Raspberry Pi/config.json", field examples:
+    * iot_endpoint: `<YOUR IOT ID>.iot.us-east-1.amazonaws.com`
+    * name: `my bedroom`
+    * MAC: `FF-FF-FF-FF-FF-FF`
+
 # Voice commands for alexa:
  * Ask (App name) {State}
  * Open (App name)
@@ -15,6 +31,21 @@ NOTE: Necessary to make an explanation (TODO)
      2. You can respond: {State}
 
  {State} = ["on", "off", "switch", "sleep", "wake up"]
+
+
+# Help commands (CMD)
+If the PC is turned on alone:
+```cmd
+powercfg -lastwake
+```
+```cmd
+powercfg -waketimers
+```
+
+Get the mac of the pc:
+```cmd
+getmac
+```
 
 # Using
  * [AWS IoT](https://aws.amazon.com/iot/)

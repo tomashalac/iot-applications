@@ -1,0 +1,5 @@
+{
+  "iot_endpoint": "<YOU AWS IOT URL>",
+  "name": "<YOU AWS THING NAME>",
+  "MAC": "<YOU PC MAC ADDRESS>"
+}

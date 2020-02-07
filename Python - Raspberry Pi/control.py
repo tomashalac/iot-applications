@@ -5,6 +5,7 @@ import IoT
 import os
 import json
 from wakeonlan import send_magic_packet
+import config
 
 #The light always starts off, to avoid inconveniences due to power outages at night
 estado = False
@@ -32,26 +33,25 @@ def callBack(command = "switch"):
     elif command == "off_key":
         off_key = not off_key
     elif command == "wake up":
-        send_magic_packet('B0-6E-BF-CD-A6-C9')
+        send_magic_packet(config.MAC)
     else:
-        print "Error with the command: " + str(command)
-    print "Final state: " + str(command)
+        print("Error with the command: " + str(command))
+    print("Final state: " + str(command))
     update_status()
+
 
 def OnKey():
     if off_key == False:
         callBack()
-    
+
+
 def update_status():
     global estado
     if not estado:
         GPIO.output(18, GPIO.HIGH)
-        if(os.path.isfile("on")):
-            os.remove("on")
     else:
         GPIO.output(18, GPIO.LOW)
-        file = open("on","w+")
-        file.close()
+
 
 def customShadowCallback_Update(payload, responseStatus, token):
     if responseStatus == "timeout":

@@ -4,63 +4,62 @@ import os
 import json
 import sys
 import control
+import config
 
 thisDir = os.path.dirname(os.path.realpath(__file__))
 logging.basicConfig(level=logging.DEBUG, filename=thisDir+'/logger.log')
 
-#Configure your IoT url here
-host = "<YOUR IOT ID>.iot.us-east-1.amazonaws.com"
 
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
-    data = json.loads(message.payload)
+    data = json.loads(message.payload.decode("utf8"))
     command = ""
     to = "client"
     
-    if("command" in data):
+    if "command" in data:
         command = data["command"]
         
-    if("to" in data):
+    if "to" in data:
         to = data["to"]
-        
     
-    if(to == "server"):
+    if to == "server":
         return
 
-        
-    print "A message was received with the command=" + str(command);    
+    print("A message was received with the command=" + str(command))
     sys.stdout.flush()
-    
-    
+
     if command == "ping":
-        Pong()
+        pong()
     else:
         control.callBack(command)
 
-def Pong():
+
+def pong():
     SendMSG('{"command": "pong", "estado": "' + str(control.estado) + '", "to": "server", "off_key": "' + str(control.off_key) + '"}')
-    
+
+
 def SendMSG(msg):
     Connection.publish("global",  str(msg), 0)
-    print "The following message was sent: " + str(msg)
-        
+    print("The following message was sent:", msg)
+
+
 def start():
+    print("Connecting IoT, endpoint:" + str(config.iot_endpoint))
     logging.info("----- START OF THE IoT LOG -----")
     try:
         dir = os.path.dirname(os.path.realpath(__file__))
-        
-        global host
+
         rootCAPath = dir + "/root-CA.crt"
-        certificatePath = dir + "/a.cert.pem"
-        privateKeyPath = dir + "/a.private.key"
+        certificatePath = dir + "/" + config.name +".cert.pem"
+        privateKeyPath = dir + "/" + config.name + ".private.key"
 
         streamHandler = logging.StreamHandler()
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         streamHandler.setFormatter(formatter)
 
         global myAWSIoTMQTTClient
-        myAWSIoTMQTTClient = AWSIoTMQTTShadowClient("basicPubSub")
-        myAWSIoTMQTTClient.configureEndpoint(host, 8883)
+        myAWSIoTMQTTClient = AWSIoTMQTTShadowClient(config.name)
+        myAWSIoTMQTTClient.configureEndpoint(config.iot_endpoint, 8883)
         myAWSIoTMQTTClient.configureCredentials(rootCAPath, privateKeyPath, certificatePath)
         
         # AWSIoTMQTTClient connection configuration
@@ -72,13 +71,10 @@ def start():
         # Connect and subscribe to AWS IoT
         myAWSIoTMQTTClient.connect(10)
         
-        
-        
-        print "Creating shadows"
+        print("Creating shadows")
         global deviceShadowHandler
-        
-        #Change "Cuarto" with the name of your room
-        deviceShadowHandler = myAWSIoTMQTTClient.createShadowHandlerWithName("Cuarto", True)
+
+        deviceShadowHandler = myAWSIoTMQTTClient.createShadowHandlerWithName(config.name, True)
         
         global Connection
         Connection = myAWSIoTMQTTClient.getMQTTConnection()
@@ -96,4 +92,6 @@ def start():
         
     except Exception as e:
         logging.exception("Error IoT: " + str(e))
-        print("Error IoT: " + str(e))
+        print("Error IoT: ", e)
+        import traceback
+        traceback.print_exc()
