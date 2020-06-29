@@ -1,11 +1,14 @@
+import sys
+
+sys.stdout = open('log.txt', 'w')
+sys.stderr = open('err.txt', 'w')
+
 import time
 from datetime import datetime
-
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient
 import logging
 import os
 import json
-import sys
 
 dir2 = os.path.dirname(os.path.realpath(__file__))
 logging.basicConfig(level=logging.DEBUG, filename=dir2 + '/logger.log')
